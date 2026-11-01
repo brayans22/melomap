@@ -6,7 +6,7 @@
 <p align="center"><strong>Lo que suena en el mundo, ahora mismo.</strong></p>
 
 <p align="center">
-  <a href="https://github.com/TU-USUARIO/melomap/actions/workflows/ci.yml"><img src="https://github.com/TU-USUARIO/melomap/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/brayans22/melomap/actions/workflows/ci.yml"><img src="https://github.com/brayans22/melomap/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/python-3.12-5B7CFF" alt="Python 3.12">
   <img src="https://img.shields.io/badge/coverage-%E2%89%A590%25-8FE8FF" alt="Coverage ≥ 90 %">
   <img src="https://img.shields.io/badge/type%20hints-mypy%20strict-A77BFF" alt="mypy strict">
