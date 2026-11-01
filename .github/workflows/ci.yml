@@ -60,7 +60,7 @@ jobs:
 
       - name: Guardar el reporte de cobertura
         if: always()            # se guarda aunque un paso anterior falle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-report
           path: coverage.xml
