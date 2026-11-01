@@ -1,0 +1,67 @@
+# =============================================================================
+# CI · Integración continua de MeloMap
+# -----------------------------------------------------------------------------
+# Cuándo corre:  en cada push a main y en cada pull request.
+# Dónde corre:   en una máquina Windows que GitHub presta gratis (windows-latest),
+#                el mismo sistema operativo que usarán tus servidores.
+# Qué hace:      instala el proyecto y revisa estilo, formato, tipos, tests y
+#                cobertura. Si un paso falla, el pipeline queda en rojo y no
+#                se puede hacer merge (cuando actives la protección de la rama).
+# =============================================================================
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Si haces otro push al mismo PR, cancela la ejecución anterior (ahorra minutos).
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Mínimo privilegio también aquí: el workflow solo puede leer el repositorio.
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Calidad y tests
+    runs-on: windows-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Instalar Python y dependencias exactas del lockfile
+        run: uv sync --locked
+
+      - name: Ruff · malas prácticas
+        run: uv run ruff check .
+
+      - name: Ruff · formato
+        run: uv run ruff format --check .
+
+      - name: mypy · type hints en modo estricto
+        run: uv run mypy
+
+      - name: pytest · tests y cobertura mínima de 90 %
+        run: uv run pytest --cov-report=xml
+
+      - name: pre-commit · YAML válido, espacios y búsqueda de secretos (gitleaks)
+        run: uv run pre-commit run --all-files --show-diff-on-failure
+
+      - name: Guardar el reporte de cobertura
+        if: always()            # se guarda aunque un paso anterior falle
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+          retention-days: 14

@@ -1,0 +1,22 @@
+# =============================================================================
+# .gitattributes · cómo trata Git los finales de línea
+# -----------------------------------------------------------------------------
+# Windows termina las líneas con CRLF (\r\n); casi todas las herramientas de
+# Python, GitHub y los linters esperan LF (\n). Si no se define, los diffs se
+# llenan de cambios falsos. Esta regla guarda todo como LF en el repositorio.
+# =============================================================================
+
+* text=auto eol=lf
+
+# Los scripts de PowerShell y archivos .bat se guardan con CRLF, como espera Windows.
+*.ps1 text eol=crlf
+*.psm1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Archivos binarios: nunca tocar.
+*.png binary
+*.jpg binary
+*.ico binary
+*.pbix binary
+*.parquet binary

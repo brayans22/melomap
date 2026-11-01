@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" width="440" height="96" role="img" aria-label="MeloMap">
+  <rect width="220" height="48" fill="#08080B"/>
+  <g transform="translate(8 8)">
+    <defs><clipPath id="g"><circle cx="16" cy="16" r="13"/></clipPath></defs>
+    <circle cx="16" cy="16" r="13" fill="#15182E"/>
+    <g clip-path="url(#g)" fill="none" stroke="#2E3A72" stroke-width="1"><ellipse cx="16" cy="16" rx="13" ry="4.5"/><ellipse cx="16" cy="16" rx="5.5" ry="13"/></g>
+    <polyline clip-path="url(#g)" points="3,16 6,14 8.5,19 11,10 13.5,22 16,7 18.5,24 21,11 23.5,20 26,14 29,16" fill="none" stroke="#F2F3F7" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="16" cy="16" r="13" fill="none" stroke="#5B7CFF" stroke-width="2"/>
+  </g>
+  <text x="50" y="32" fill="#F2F3F7" font-family="Sora, 'Segoe UI', sans-serif" font-size="24" letter-spacing="-0.5"><tspan font-weight="700">melo</tspan><tspan font-weight="400">map</tspan></text>
+</svg>

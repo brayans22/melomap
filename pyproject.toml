@@ -1,0 +1,110 @@
+# =============================================================================
+# pyproject.toml · raíz del monorepo MeloMap
+# -----------------------------------------------------------------------------
+# Es el archivo central de un proyecto Python moderno (estándar PEP 621).
+# Aquí viven: los datos del proyecto, sus dependencias y la configuración de
+# TODAS las herramientas de calidad (Ruff, mypy, pytest, coverage).
+# Un solo archivo en vez de setup.py, setup.cfg, .flake8, mypy.ini, pytest.ini…
+# =============================================================================
+
+[project]
+name = "melomap"
+version = "0.1.0"
+description = "Lo que suena en el mundo, ahora mismo: charts por país, análisis de audio y predicción de hits."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+# La raíz no tiene código propio: solo depende de las aplicaciones del monorepo.
+# Cada app (apps/ingest, después apps/api…) es un paquete independiente.
+dependencies = ["melomap-ingest"]
+
+# -----------------------------------------------------------------------------
+# Workspace de uv: varios paquetes en un mismo repositorio que comparten
+# un único entorno virtual (.venv) y un único lockfile (uv.lock).
+# -----------------------------------------------------------------------------
+[tool.uv.workspace]
+members = ["apps/ingest"]
+
+[tool.uv.sources]
+# "workspace = true" significa: no lo descargues de PyPI, úsalo desde la carpeta.
+melomap-ingest = { workspace = true }
+
+# -----------------------------------------------------------------------------
+# Dependencias de desarrollo: se instalan para programar y en el CI,
+# pero NUNCA se instalan en el servidor de producción.
+# -----------------------------------------------------------------------------
+[dependency-groups]
+dev = [
+    "pytest>=8.3",        # framework de tests
+    "pytest-cov>=5.0",    # mide la cobertura (coverage) de los tests
+    "mypy>=1.11",         # verificador de type hints
+    "ruff>=0.6",          # linter + formateador (reemplaza a flake8, isort y black)
+    "pre-commit>=3.8",    # ejecuta revisiones antes de cada commit
+    "types-PyYAML>=6.0",  # type hints de la librería PyYAML para que mypy la entienda
+]
+
+# =============================================================================
+# Ruff: estilo y malas prácticas
+# =============================================================================
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["apps/ingest/src"]
+# Los ejemplos de código dentro de la documentación son ilustrativos: no se revisan.
+extend-exclude = ["docs"]
+
+[tool.ruff.lint]
+# Cada letra activa una familia de reglas. Ver: https://docs.astral.sh/ruff/rules/
+select = [
+    "E", "W",  # pycodestyle: estilo básico (PEP 8)
+    "F",       # pyflakes: variables sin usar, imports rotos
+    "I",       # isort: orden de los imports
+    "B",       # flake8-bugbear: errores típicos que parecen correctos
+    "UP",      # pyupgrade: sintaxis moderna de Python
+    "N",       # pep8-naming: nombres de clases, funciones y variables
+    "SIM",     # simplificaciones de código
+    "S",       # flake8-bandit: problemas de seguridad
+    "ANN",     # exige type hints en funciones
+    "PTH",     # usar pathlib en vez de os.path
+    "RUF",     # reglas propias de Ruff
+]
+
+[tool.ruff.lint.per-file-ignores]
+# En los tests se permite usar assert (S101) y no tipar fixtures internas.
+"**/tests/**" = ["S101", "ANN"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+# =============================================================================
+# mypy: verificación de tipos en modo estricto
+# =============================================================================
+[tool.mypy]
+python_version = "3.12"
+strict = true                # activa todas las comprobaciones importantes
+warn_unreachable = true      # avisa de código que nunca se ejecuta
+pretty = true
+mypy_path = "apps/ingest/src"
+packages = ["melomap_ingest"]
+
+# =============================================================================
+# pytest y coverage
+# =============================================================================
+[tool.pytest.ini_options]
+testpaths = ["apps/ingest/tests"]
+addopts = [
+    "-ra",                          # resumen de tests saltados o fallidos
+    "--strict-markers",             # error si usas un marcador no declarado
+    "--cov=melomap_ingest",         # mide la cobertura de este paquete
+    "--cov-branch",                 # mide también ramas (if/else), no solo líneas
+    "--cov-report=term-missing",    # muestra qué líneas faltan por probar
+]
+
+[tool.coverage.report]
+fail_under = 90        # si la cobertura baja de 90 %, los tests fallan
+show_missing = true
+skip_covered = false
+exclude_also = [
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]

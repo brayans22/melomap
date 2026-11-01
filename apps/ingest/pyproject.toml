@@ -1,0 +1,24 @@
+# pyproject.toml del paquete melomap-ingest (miembro del workspace).
+# Cada aplicación del monorepo declara solo SUS dependencias.
+
+[project]
+name = "melomap-ingest"
+version = "0.1.0"
+description = "Ingesta de charts musicales de MeloMap."
+requires-python = ">=3.12"
+dependencies = [
+    "pyyaml>=6.0",   # para leer config/countries.yaml
+]
+
+# Comando de consola: tras `uv sync`, puedes ejecutar `uv run melomap-countries`.
+[project.scripts]
+melomap-countries = "melomap_ingest.cli:main"
+
+# El "build backend" convierte esta carpeta en un paquete instalable.
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# Patrón src/: el código vive en src/melomap_ingest y no en la raíz.
+packages = ["src/melomap_ingest"]

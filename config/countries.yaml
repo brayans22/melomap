@@ -1,0 +1,192 @@
+# =============================================================================
+# config/countries.yaml · los países que sigue MeloMap
+# -----------------------------------------------------------------------------
+# YAML en 30 segundos:
+#   clave: valor          → un dato
+#   - elemento            → un elemento de una lista
+#   la sangría (espacios, NUNCA tabuladores) indica qué está dentro de qué
+#   [a, b]                → lista en una sola línea
+#   # texto               → comentario
+#
+# Campos de cada país:
+#   code     código ISO 3166-1 de dos letras
+#   name_es  nombre en español latino
+#   name_en  nombre en inglés
+#   region   na · la · eu · me · af · as · kp · oc
+#   sources  fuentes de datos que se consultan: apple, lastfm
+#
+# Para agregar un país basta con añadir un bloque aquí; el código no cambia.
+# El test test_real_config_file_is_valid comprueba que este archivo sea válido.
+# =============================================================================
+
+countries:
+  # --- Norteamérica ---------------------------------------------------------
+  - code: US
+    name_es: Estados Unidos
+    name_en: United States
+    region: na
+    sources: [apple, lastfm]
+  - code: CA
+    name_es: Canadá
+    name_en: Canada
+    region: na
+    sources: [apple, lastfm]
+
+  # --- Latinoamérica --------------------------------------------------------
+  - code: MX
+    name_es: México
+    name_en: Mexico
+    region: la
+    sources: [apple, lastfm]
+  - code: CO
+    name_es: Colombia
+    name_en: Colombia
+    region: la
+    sources: [apple, lastfm]
+  - code: PE
+    name_es: Perú
+    name_en: Peru
+    region: la
+    sources: [apple, lastfm]
+  - code: CL
+    name_es: Chile
+    name_en: Chile
+    region: la
+    sources: [apple, lastfm]
+  - code: AR
+    name_es: Argentina
+    name_en: Argentina
+    region: la
+    sources: [apple, lastfm]
+  - code: BR
+    name_es: Brasil
+    name_en: Brazil
+    region: la
+    sources: [apple, lastfm]
+
+  # --- Europa ---------------------------------------------------------------
+  - code: GB
+    name_es: Reino Unido
+    name_en: United Kingdom
+    region: eu
+    sources: [apple, lastfm]
+  - code: ES
+    name_es: España
+    name_en: Spain
+    region: eu
+    sources: [apple, lastfm]
+  - code: PT
+    name_es: Portugal
+    name_en: Portugal
+    region: eu
+    sources: [apple, lastfm]
+  - code: FR
+    name_es: Francia
+    name_en: France
+    region: eu
+    sources: [apple, lastfm]
+  - code: DE
+    name_es: Alemania
+    name_en: Germany
+    region: eu
+    sources: [apple, lastfm]
+  - code: IT
+    name_es: Italia
+    name_en: Italy
+    region: eu
+    sources: [apple, lastfm]
+  - code: SE
+    name_es: Suecia
+    name_en: Sweden
+    region: eu
+    sources: [apple, lastfm]
+  - code: PL
+    name_es: Polonia
+    name_en: Poland
+    region: eu
+    sources: [apple, lastfm]
+
+  # --- Medio Oriente --------------------------------------------------------
+  - code: TR
+    name_es: Turquía
+    name_en: Turkey
+    region: me
+    sources: [apple, lastfm]
+  - code: SA
+    name_es: Arabia Saudita
+    name_en: Saudi Arabia
+    region: me
+    sources: [apple]
+
+  # --- África ---------------------------------------------------------------
+  - code: EG
+    name_es: Egipto
+    name_en: Egypt
+    region: af
+    sources: [apple]
+  - code: MA
+    name_es: Marruecos
+    name_en: Morocco
+    region: af
+    sources: [apple]
+  - code: NG
+    name_es: Nigeria
+    name_en: Nigeria
+    region: af
+    sources: [apple, lastfm]
+  - code: KE
+    name_es: Kenia
+    name_en: Kenya
+    region: af
+    sources: [apple]
+  - code: ZA
+    name_es: Sudáfrica
+    name_en: South Africa
+    region: af
+    sources: [apple, lastfm]
+
+  # --- Sur y sudeste asiático -------------------------------------------------
+  - code: IN
+    name_es: India
+    name_en: India
+    region: as
+    sources: [apple, lastfm]
+  - code: TH
+    name_es: Tailandia
+    name_en: Thailand
+    region: as
+    sources: [apple]
+  - code: PH
+    name_es: Filipinas
+    name_en: Philippines
+    region: as
+    sources: [apple, lastfm]
+  - code: ID
+    name_es: Indonesia
+    name_en: Indonesia
+    region: as
+    sources: [apple, lastfm]
+
+  # --- Corea y Japón ----------------------------------------------------------
+  - code: KR
+    name_es: Corea del Sur
+    name_en: South Korea
+    region: kp
+    sources: [apple]
+  - code: JP
+    name_es: Japón
+    name_en: Japan
+    region: kp
+    sources: [apple, lastfm]
+
+  # --- Oceanía ----------------------------------------------------------------
+  - code: AU
+    name_es: Australia
+    name_en: Australia
+    region: oc
+    sources: [apple, lastfm]
+  - code: NZ
+    name_es: Nueva Zelanda
+    name_en: New Zealand
+    region: oc
+    sources: [apple, lastfm]

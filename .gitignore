@@ -1,0 +1,55 @@
+# =============================================================================
+# .gitignore · lo que Git NUNCA debe subir al repositorio
+# =============================================================================
+
+# --- Secretos y configuración local (¡lo más importante!) ---
+.env
+.env.*
+!.env.example
+config/settings.yaml
+*.pem
+*.key
+*.pfx
+infra/vpn/*.conf
+
+# --- Entornos virtuales y cachés de Python ---
+.venv/
+__pycache__/
+*.py[cod]
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# --- Reportes de cobertura ---
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# --- Builds y paquetes ---
+build/
+dist/
+*.egg-info/
+
+# --- Datos y modelos (se generan, no se versionan) ---
+data/
+*.parquet
+*.joblib
+mlruns/
+*.ipynb_checkpoints
+
+# --- Frontend (fase 8) ---
+node_modules/
+apps/web/dist/
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Editores y sistema operativo ---
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+Thumbs.db
+desktop.ini

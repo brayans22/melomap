@@ -1,0 +1,45 @@
+# =============================================================================
+# pre-commit · revisiones automáticas ANTES de cada commit
+# -----------------------------------------------------------------------------
+# Instalación (una sola vez por computadora, desde la raíz del repo):
+#     uv run pre-commit install
+# A partir de ahí, cada `git commit` ejecuta estos hooks. Si alguno falla o
+# corrige un archivo, el commit se detiene: revisa, haz `git add` y repite.
+# Para correrlos a mano sobre todo el repo:
+#     uv run pre-commit run --all-files
+# =============================================================================
+
+repos:
+  # Revisiones básicas de archivos
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml              # el YAML tiene sintaxis válida
+      - id: check-toml              # el TOML (pyproject.toml) tiene sintaxis válida
+      - id: end-of-file-fixer       # cada archivo termina con un salto de línea
+      - id: trailing-whitespace     # quita espacios al final de las líneas
+      - id: check-added-large-files # evita subir archivos enormes por error
+        args: ["--maxkb=800"]
+      - id: check-merge-conflict    # detecta marcas <<<<<<< olvidadas de un conflicto
+
+  # Ruff: lint y formato de Python.
+  # Se ejecuta con `uv run` para usar EXACTAMENTE la misma versión que fija
+  # uv.lock: así tu PC, pre-commit y el CI nunca discrepan.
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff check
+        entry: uv run ruff check --fix
+        language: system
+        types_or: [python, pyi]
+      - id: ruff-format
+        name: ruff format
+        entry: uv run ruff format
+        language: system
+        types_or: [python, pyi]
+
+  # gitleaks: bloquea contraseñas, tokens y API keys
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks

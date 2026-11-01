@@ -1,0 +1,24 @@
+# =============================================================================
+# Dependabot · actualizaciones automáticas
+# -----------------------------------------------------------------------------
+# Cada semana GitHub revisa si hay versiones nuevas o parches de seguridad y
+# abre un pull request por cada una. El CI lo prueba; tú decides si lo unes.
+# =============================================================================
+
+version: 2
+updates:
+  # Las acciones usadas en .github/workflows (checkout, setup-uv…)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "ci"
+
+  # Las dependencias de Python declaradas en pyproject.toml / uv.lock
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "build"
