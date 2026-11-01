@@ -76,9 +76,9 @@ def test_group_by_region_keeps_order(write_yaml):
 
 
 def test_real_config_file_is_valid(real_countries_file):
-    """El archivo real del proyecto debe cargar sin errores y tener 31 países."""
+    """El archivo real del proyecto debe cargar sin errores y tener 32 países."""
     countries = load_countries(real_countries_file)
-    assert len(countries) == 31
+    assert len(countries) == 32
     assert all(isinstance(c, Country) for c in countries)
 
 
