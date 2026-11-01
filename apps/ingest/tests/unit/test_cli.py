@@ -15,7 +15,7 @@ def test_cli_prints_countries_grouped(real_countries_file, capsys):
     assert exit_code == 0
     assert "[la]" in out
     assert "México" in out
-    assert "Total: 31 países" in out
+    assert "Total: 32 países" in out
 
 
 def test_cli_english_names(real_countries_file, capsys):
