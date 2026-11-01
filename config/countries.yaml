@@ -63,6 +63,11 @@ countries:
     name_en: Brazil
     region: la
     sources: [apple, lastfm]
+  - code: UY
+    name_es: Uruguay
+    name_en: Uruguay
+    region: la
+    sources: [apple, lastfm]
 
   # --- Europa ---------------------------------------------------------------
   - code: GB
